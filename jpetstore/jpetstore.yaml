@@ -2,6 +2,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: jpetstoreweb
+  namespace: jpetstore
 spec:
   replicas: 1
   selector:
@@ -33,6 +34,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: web
+  namespace: jpetstore
 spec:
   selector:
     app: jpetstoreweb
@@ -44,6 +46,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: jpetstoredb
+  namespace: jpetstore
 spec:
   replicas: 1
   selector:
@@ -75,6 +78,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: db
+  namespace: jpetstore
 spec:
   selector:
     app: jpetstoredb
@@ -86,9 +90,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: jpetstore-ingress
+  namespace: jpetstore
 spec:
   rules:
-  - host: jpetstore.rtbsystems.com
+  - host: jpetstore.vdoubleb.com
     http: 
       paths:
       - pathType: Prefix
