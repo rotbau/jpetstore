@@ -82,15 +82,19 @@ spec:
   - port: 3306
     targetPort: 3306
 ---
+apiVersion: networking.k8s.io/v1
 kind: Ingress
-apiVersion: networking.k8s.io/v1beta1
 metadata:
   name: jpetstore-ingress
 spec:
   rules:
   - host: jpetstore.rtbsystems.com
+    http: 
       paths:
-      - path: /
+      - pathType: Prefix
+        path: /
         backend:
-          serviceName: web
-          servicePort: 80
+          service:
+            name: web
+            port: 
+              number: 80
