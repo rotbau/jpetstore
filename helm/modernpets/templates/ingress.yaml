@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "modernpets.name" . }}-jpetstoreweb
+  labels:
+    app: {{ template "modernpets.name" . }}-jpetstoreweb
+    chart: {{ template "modernpets.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  rules:
+  {{- range .Values.ingress.hosts }}
+    - host: {{ . }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: web
+              servicePort: 80
+  {{- end }}
